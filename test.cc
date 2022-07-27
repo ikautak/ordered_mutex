@@ -1,9 +1,18 @@
 #include "iutest/include/iutest.hpp"
 #include "ordered_mutex.h"
 
+IUTEST_MAKE_PEEP(int OrderedMutex::*, OrderedMutex, head_);
+
 IUTEST(test, test_0) {
-  int x = 0;
-  IUTEST_ASSERT_EQ(x, 0);
+  OrderedMutex mutex;
+  int x = IUTEST_PEEP_GET(mutex, OrderedMutex, head_);
+  IUTEST_ASSERT_EQ(0, x);
+
+  mutex.lock();
+  x = IUTEST_PEEP_GET(mutex, OrderedMutex, head_);
+  IUTEST_ASSERT_EQ(1, x);
+
+  mutex.unlock();
 }
 
 int main(int argc, char* argv[]) {
