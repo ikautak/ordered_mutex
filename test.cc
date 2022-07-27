@@ -1,4 +1,5 @@
 #include "iutest/include/iutest.hpp"
+#include "ordered_mutex.h"
 
 IUTEST(test, test_0) {
   int x = 0;
